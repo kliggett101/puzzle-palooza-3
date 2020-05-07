@@ -40,13 +40,31 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 . . . . 1 d . . . . 1 1 . . . . 
 . . . d d d . . . . 1 1 1 . . . 
 . . . . . . . . . . . . . . . . 
-`, SpriteKind.Enemy)
+`, SpriteKind.Food)
+    mySprite4 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . f f f f f f f f f f . . . . 
+. . f f f f f f f f f f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d e d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+. . f d d d d d d d d f . . . . 
+`, SpriteKind.Player)
+    mySprite.setPosition(555, 555)
     controller.moveSprite(mySprite)
-    mySprite.ay = 250
+    mySprite.ay = 150
     mySprite2.destroy()
+    mySprite3.follow(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 8))
-    info.changeScoreBy(10)
-    room += 1
     tiles.setTilemap(tiles.createTilemap(
             hex`1000100002020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020202020201020201020202020201020202020202010202020202020202010202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202`,
             img`
@@ -71,7 +89,89 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
             TileScale.Sixteen
         ))
     tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 9))
+    info.changeScoreBy(10)
+    room += 1
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+	
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    controller.moveSprite(mySprite)
+    mySprite.ax = 100
+    mySprite3.destroy()
+    mySprite5 = sprites.create(img`
+. . . . . . . . . . . . . . . . . . . . . . . . 
+. . . . . . . . . . . f f . . . . . . . . . . . 
+. . . . . . . . . . f 8 8 f . . . . . . . . . . 
+. . . . . . . . . f f 8 8 f f . . . . . . . . . 
+. . . . . . . . . f 8 8 8 8 f . . . . . . . . . 
+. . . . . . . . f 8 8 8 8 8 8 f . . . . . . . . 
+. . . . . . f f 8 8 8 8 8 8 8 8 f f . . . . . . 
+. . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . 
+. . . . . f f 8 8 8 8 8 8 8 8 8 8 f f . . . . . 
+. . . . . f 8 8 8 8 8 8 8 8 8 8 8 8 f . . . . . 
+. . . . f 8 8 f f 8 8 8 8 8 f f f 8 8 f . . . . 
+. . . . f f f f 8 8 f f f 8 8 f 8 f f f . . . . 
+. . . . . f 8 f 8 f f 8 f f 8 f 8 8 f . . . . . 
+. . . . f 8 8 f f f 8 8 f f f f f 8 f . . . . . 
+. . . . f 8 f f f f 8 f f f f f f f f f . . . . 
+. . . . f f f 8 8 f f f f f f 8 8 f f f . . . . 
+. . . . f 8 8 8 f f f f 8 f f f 8 8 8 f . . . . 
+. . . f 8 8 8 f f 8 f 8 8 f 8 f f 8 8 8 f . . . 
+. . f 8 8 8 8 8 8 8 8 8 8 f 8 8 8 8 8 8 f . . . 
+. f 8 8 f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f . . 
+. f f f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f 8 f . 
+. f f 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 f f . 
+. . f f 8 8 f 8 8 8 f 8 8 f 8 8 8 8 f 8 8 8 f . 
+. . f 8 f f 8 8 f f f 8 8 f f 8 f 8 8 f f 8 8 f 
+. f 8 8 f f 8 f f 8 f 8 f 8 8 f f f 8 f f f f f 
+f 8 8 f f 8 f f 8 8 f f f f 8 8 f f f f 8 f . . 
+f f f f 8 8 f 8 8 f f f f f f 8 f 8 f f 8 8 f . 
+. f f f f f f f f f f f f f f f f 8 8 f f 8 f . 
+. f f 8 8 8 f f 8 8 f f 8 f f 8 f f 8 f 8 f f . 
+. f 8 8 8 f f 8 8 8 f f 8 8 f 8 8 8 8 8 8 8 f f 
+f 8 8 8 8 8 8 8 8 8 f 8 8 8 8 8 8 8 8 8 8 8 8 f 
+f f f 8 8 8 f 8 8 8 8 8 8 8 8 8 8 f 8 8 8 f f . 
+. . f f f f 8 8 f 8 8 8 8 8 8 8 8 8 f f f f . . 
+. . . . . f 8 f f 8 8 f 8 8 8 f f 8 f . . . . . 
+. . . . . . f f f 8 f f f 8 8 f f f f . . . . . 
+. . . . . . . . . f f e e f f . . . . . . . . . 
+. . . . . . . . . f e e e e f . . . . . . . . . 
+. . . . . . . . . f e e e e f . . . . . . . . . 
+. . . . . . . . f e e e f e e f . . . . . . . . 
+. . . . . . . . f e f e f f e f . . . . . . . . 
+`, SpriteKind.Enemy)
+    mySprite.setPosition(555, 555)
+    game.splash("yay! You're so close. You just have to make it to the door without Moredaci's treasure hitting you.")
+    scene.setBackgroundColor(9)
+    info.changeScoreBy(20)
+    tiles.setTilemap(tiles.createTilemap(
+            hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050000000500000005000005000000010101010101010101010101010203030202020202020202020202020102030303030303030101010101010101020303030303030302020202020202010203030303030303030303030303020202030302020202020202020203030303030303`,
+            img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+`,
+            [myTiles.tile0,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.castle.tileGrass3,sprites.castle.tileDarkGrass3,sprites.dungeon.collectibleRedCrystal],
+            TileScale.Sixteen
+        ))
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 9))
+})
+let mySprite5: Sprite = null
+let mySprite4: Sprite = null
 let mySprite3: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
@@ -244,7 +344,7 @@ c c 7 7 7 7 7 7 7 7 7 7 7 7 6 c
 . . . . . e e e e e e . . . . . 
 . . . . . . . e e . . . . . . . 
 `, SpriteKind.Food)
-tiles.placeOnTile(mySprite2, tiles.getTileLocation(25, 25))
+mySprite2.setPosition(255, 255)
 info.setScore(0)
 tiles.setTilemap(tiles.createTilemap(
             hex`1000100001010101010101010101010101010101010101010101010101010101010101010202020202020202020202020201010101010101010101010101010102010101010101010101030301010202020101010101010202020202020202010101010101010104010101010101010101010101010101040101010101010101010101010101010201010201010202020202020201010102010102010101010101010101010101020101020101010101010101010101010201010201010201010101010101010102010102010102020202020101010101020101010101020101010201010101010201010101010201010102020101010102020202020202010101010201`,
