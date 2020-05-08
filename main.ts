@@ -20,7 +20,10 @@ namespace myTiles {
 `
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    game.splash("Oh no! By recahing the ancient Willow tree you unlocked the curse on the evil mummy, Mordecai! Run!")
+    game.splash("Yay! One down, two more to go.")
+    for (let index = 0; index < 4; index++) {
+        music.playMelody("C D E F G A B C5 ", 120)
+    }
     tiles.setTilemap(tiles.createTilemap(
             hex`1000100002020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020202020201020201020202020201020202020202010202020202020202010202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202`,
             img`
@@ -198,6 +201,10 @@ d 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 d d d d d d d d d d d d 7 7 7 7 7 d d 
     game.over(true)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    game.splash("You got the magical portal! Now get to the enchanted spruce to win the game!")
+    for (let index = 0; index < 4; index++) {
+        music.playMelody("F E D C D E F G ", 120)
+    }
     scene.setBackgroundColor(9)
     controller.moveSprite(mySprite)
     mySprite.ax = 100
@@ -214,7 +221,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherS
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+. 2 . . . 2 . . . 2 . . 2 . . . 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
@@ -277,6 +284,79 @@ let mySprite5: Sprite = null
 let mySprite3: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
+game.splash("Welcome to puzzle palooza! You are the apprentice of the puzzle master. Collect the three magical objects to win the game ")
+mySprite = sprites.create(img`
+. . . . . f f 4 4 f f . . . . . 
+. . . . f 5 4 5 5 4 5 f . . . . 
+. . . f e 4 5 5 5 5 4 e f . . . 
+. . f b 3 e 4 4 4 4 e 3 b f . . 
+. . f 3 3 3 3 3 3 3 3 3 3 f . . 
+. f 3 3 e b 3 e e 3 b e 3 3 f . 
+. f 3 3 f f e e e e f f 3 3 f . 
+. f b b f b f e e f b f b b f . 
+. f b b e 1 f 4 4 f 1 e b b f . 
+f f b b f 4 4 4 4 4 4 f b b f f 
+f b b f f f e e e e f f f b b f 
+. f e e f b d d d d b f e e f . 
+. . e 4 c d d d d d d c 4 e . . 
+. . e f b d b d b d b b f e . . 
+. . . f f 1 d 1 d 1 d f f . . . 
+. . . . . f f b b f f . . . . . 
+`, SpriteKind.Player)
+mySprite.setPosition(27, 20)
+mySprite2 = sprites.create(img`
+. . . . . . c c 6 6 . . . . . . 
+. . . . . c 6 5 7 6 c . . . . . 
+. . . . c 6 7 7 5 7 6 c . . . . 
+. . . . c c 6 7 7 6 6 6 . . . . 
+. . . c c 6 c 6 6 6 7 c c . . . 
+. . 6 c 6 6 6 7 7 7 c c 6 c . . 
+. . c 7 6 6 6 6 7 6 6 7 7 6 . . 
+. . c 6 7 7 7 7 7 7 7 7 6 c . . 
+. . c c 6 7 7 7 7 7 7 6 c c . . 
+. c 6 7 c c 7 6 6 7 6 6 7 6 c . 
+. c 7 7 7 6 6 6 6 6 7 7 7 7 c . 
+. c 6 7 7 7 7 7 7 7 7 7 7 6 6 . 
+. c c 7 7 6 7 7 7 6 7 7 6 6 6 6 
+c 6 7 6 c c 6 7 6 6 6 6 6 7 7 6 
+c 7 7 7 7 6 6 6 6 6 6 7 7 7 7 6 
+c c 7 7 7 7 7 7 7 7 7 7 7 7 6 c 
+. c 6 7 6 7 7 7 6 7 7 7 6 7 c . 
+. . c c 6 6 7 6 6 6 7 6 6 c . . 
+. . . c c c 6 c 6 6 c c c . . . 
+. . . . . c c c c c c . . . . . 
+. . . . . . . e e . . . . . . . 
+. . . . . . e e e e . . . . . . 
+. . . . . e e e e e e . . . . . 
+. . . . . . . e e . . . . . . . 
+`, SpriteKind.Food)
+mySprite2.setPosition(255, 255)
+info.setScore(0)
+tiles.setTilemap(tiles.createTilemap(
+            hex`1000100001010101010101010101010101010101010101010101010101010101010101010202020202020202020202020201010101010101010101010101010102010101010101010101030301010202020101010101010202020202020202010101010101010104010101010101010101010101010101040101010101010101010101010101010201010201010202020202020201010102010102010101010101010101010101020101020101010101010101010101010201010201010201010101010101010102010102010102020202020101010101020101010101020101010201010101010201010101010201010102020101010102020202020202010101010201`,
+            img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 . . . 
+. . . . . . . . . . . . 2 . . . 
+. . . . . . . . . . 2 2 2 . . . 
+. . . 2 2 2 2 2 2 2 2 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . 2 . . 2 . . 2 2 2 2 2 2 2 
+. . . 2 . . 2 . . . . . . . . . 
+. . . 2 . . 2 . . . . . . . . . 
+. . . 2 . . 2 . . 2 . . . . . . 
+. . . 2 . . 2 . . 2 2 2 2 2 . . 
+. . . 2 . . . . . 2 . . . 2 . . 
+. . . 2 . . . . . 2 . . . 2 2 . 
+. . . 2 2 2 2 2 2 2 . . . . 2 . 
+`,
+            [myTiles.tile0,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.darkGroundSouthEast1,sprites.dungeon.darkGroundNorthWest1],
+            TileScale.Sixteen
+        ))
+controller.moveSprite(mySprite)
+scene.cameraFollowSprite(mySprite)
 scene.setBackgroundImage(img`
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 
@@ -400,76 +480,6 @@ d 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 d d d d d d d d d d d d 7 7 7 7 7 d d 
 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 
 `)
 let room = 1
-game.splash("Welcome to puzzle palooza! You are the apprentice of the puzzle master ..")
-mySprite = sprites.create(img`
-. . . . . f f 4 4 f f . . . . . 
-. . . . f 5 4 5 5 4 5 f . . . . 
-. . . f e 4 5 5 5 5 4 e f . . . 
-. . f b 3 e 4 4 4 4 e 3 b f . . 
-. . f 3 3 3 3 3 3 3 3 3 3 f . . 
-. f 3 3 e b 3 e e 3 b e 3 3 f . 
-. f 3 3 f f e e e e f f 3 3 f . 
-. f b b f b f e e f b f b b f . 
-. f b b e 1 f 4 4 f 1 e b b f . 
-f f b b f 4 4 4 4 4 4 f b b f f 
-f b b f f f e e e e f f f b b f 
-. f e e f b d d d d b f e e f . 
-. . e 4 c d d d d d d c 4 e . . 
-. . e f b d b d b d b b f e . . 
-. . . f f 1 d 1 d 1 d f f . . . 
-. . . . . f f b b f f . . . . . 
-`, SpriteKind.Player)
-mySprite.setPosition(27, 20)
-mySprite2 = sprites.create(img`
-. . . . . . c c 6 6 . . . . . . 
-. . . . . c 6 5 7 6 c . . . . . 
-. . . . c 6 7 7 5 7 6 c . . . . 
-. . . . c c 6 7 7 6 6 6 . . . . 
-. . . c c 6 c 6 6 6 7 c c . . . 
-. . 6 c 6 6 6 7 7 7 c c 6 c . . 
-. . c 7 6 6 6 6 7 6 6 7 7 6 . . 
-. . c 6 7 7 7 7 7 7 7 7 6 c . . 
-. . c c 6 7 7 7 7 7 7 6 c c . . 
-. c 6 7 c c 7 6 6 7 6 6 7 6 c . 
-. c 7 7 7 6 6 6 6 6 7 7 7 7 c . 
-. c 6 7 7 7 7 7 7 7 7 7 7 6 6 . 
-. c c 7 7 6 7 7 7 6 7 7 6 6 6 6 
-c 6 7 6 c c 6 7 6 6 6 6 6 7 7 6 
-c 7 7 7 7 6 6 6 6 6 6 7 7 7 7 6 
-c c 7 7 7 7 7 7 7 7 7 7 7 7 6 c 
-. c 6 7 6 7 7 7 6 7 7 7 6 7 c . 
-. . c c 6 6 7 6 6 6 7 6 6 c . . 
-. . . c c c 6 c 6 6 c c c . . . 
-. . . . . c c c c c c . . . . . 
-. . . . . . . e e . . . . . . . 
-. . . . . . e e e e . . . . . . 
-. . . . . e e e e e e . . . . . 
-. . . . . . . e e . . . . . . . 
-`, SpriteKind.Food)
-mySprite2.setPosition(255, 255)
-info.setScore(0)
-tiles.setTilemap(tiles.createTilemap(
-            hex`1000100001010101010101010101010101010101010101010101010101010101010101010202020202020202020202020201010101010101010101010101010102010101010101010101030301010202020101010101010202020202020202010101010101010104010101010101010101010101010101040101010101010101010101010101010201010201010202020202020201010102010102010101010101010101010101020101020101010101010101010101010201010201010201010101010101010102010102010102020202020101010101020101010101020101010201010101010201010101010201010102020101010102020202020202010101010201`,
-            img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-2 2 2 2 2 2 2 2 2 2 2 2 2 . . . 
-. . . . . . . . . . . . 2 . . . 
-. . . . . . . . . . 2 2 2 . . . 
-. . . 2 2 2 2 2 2 2 2 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . 2 . . 2 . . 2 2 2 2 2 2 2 
-. . . 2 . . 2 . . . . . . . . . 
-. . . 2 . . 2 . . . . . . . . . 
-. . . 2 . . 2 . . 2 . . . . . . 
-. . . 2 . . 2 . . 2 2 2 2 2 . . 
-. . . 2 . . . . . 2 . . . 2 . . 
-. . . 2 . . . . . 2 . . . 2 2 . 
-. . . 2 2 2 2 2 2 2 . . . . 2 . 
-`,
-            [myTiles.tile0,sprites.dungeon.darkGroundCenter,sprites.dungeon.floorLight0,sprites.dungeon.darkGroundSouthEast1,sprites.dungeon.darkGroundNorthWest1],
-            TileScale.Sixteen
-        ))
-controller.moveSprite(mySprite)
-scene.cameraFollowSprite(mySprite)
+for (let index = 0; index < 4; index++) {
+    music.playMelody("C D E D C D E D ", 120)
+}
