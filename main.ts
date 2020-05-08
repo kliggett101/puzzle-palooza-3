@@ -22,7 +22,6 @@ namespace myTiles {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     scene.setBackgroundColor(9)
     game.splash("Oh no! By recahing the ancient Willow tree you unlocked the curse on the evil mummy, Mordecai! Run!")
-    scene.cameraFollowSprite(mySprite)
     mySprite3 = sprites.create(img`
 . . . . . . . . . . . . . . . . 
 . . . . . . 1 1 1 1 . . . . . . 
@@ -59,12 +58,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 . . f d d d d d d d d f . . . . 
 . . f d d d d d d d d f . . . . 
 `, SpriteKind.Player)
-    mySprite.setPosition(555, 555)
+    mySprite.setPosition(7, 23)
+    scene.cameraFollowSprite(mySprite)
     controller.moveSprite(mySprite)
     mySprite.ay = 150
     mySprite2.destroy()
     mySprite3.follow(mySprite)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 8))
     tiles.setTilemap(tiles.createTilemap(
             hex`1000100002020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020201020202020201020202020201020202010202020202010202020202010202020102020202020102020202020102020202020201020201020202020201020202020202010202020202020202010202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202020202020201020202020201020202020202020202010202020202010202020202020202020102020202020102020202`,
             img`
@@ -88,7 +87,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
             [myTiles.tile0,sprites.dungeon.collectibleInsignia,sprites.dungeon.darkGroundNorthWest1],
             TileScale.Sixteen
         ))
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(0, 9))
     info.changeScoreBy(10)
     room += 1
 })
